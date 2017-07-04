@@ -11,6 +11,7 @@ let comment = "--" [^ '\r' '\n']*
 rule read = parse
   | [' ' '\t' '\r' '\n'] { read lexbuf }
   | comment              { read lexbuf }
+  | "{-"                 { read_multiline_comment lexbuf }
   | ['0'-'9']+           { INT (int_of_string(Lexing.lexeme lexbuf)) }
   | "Int"                { TINT }
   | "Bool"               { TBOOL }
