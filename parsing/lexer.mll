@@ -15,36 +15,38 @@ rule read = parse
   | ['0'-'9']+           { INT (int_of_string(Lexing.lexeme lexbuf)) }
   | "Int"                { TINT }
   | "Bool"               { TBOOL }
-  | "true"               { TRUE }
-  | "false"              { FALSE }
-  | "case"          { CASE }
-  | "if"            { IF }
-  | "then"          { THEN }
-  | "else"          { ELSE }
-  | "let"           { LET }
-  | "in"            { IN }
-  | "return"        { RETURN }
-  | "handle"        { HANDLE }
-  | "with"          { WITH }
-  | "do"            { DO }
-  | '\\'            { LAMBDA }
-  | ";;"            { SEMISEMI }
-  | ';'             { SEMI }
-  | '"'             {  (read_string (Buffer.create 17) lexbuf)  }
-  | '='             { EQUAL }
-  | '<'             { LESS }
-  | "->"            { TARROW }
-  | "=>"            { HARROW }
-  | ':'             { COLON }
-  | '('             { LPAREN }
-  | ')'             { RPAREN }
-  | '+'             { PLUS }
-  | '-'             { MINUS }
-  | '*'             { TIMES }
-  | ','             { COMMA }
-  | var             { VAR (Lexing.lexeme lexbuf) }
-  | constr          { CONSTR (Lexing.lexeme lexbuf) }
-  | eof { EOF }
+  | "String"             { TSTRING }
+  | "type"               { TYPE }
+  | "True"               { TRUE }
+  | "False"              { FALSE }
+  | "case"               { CASE }
+  | "if"                 { IF }
+  | "then"               { THEN }
+  | "else"               { ELSE }
+  | "let"                { LET }
+  | "in"                 { IN }
+  | "return"             { RETURN }
+  | "handle"             { HANDLE }
+  | "with"               { WITH }
+  | "do"                 { DO }
+  | '\\'                 { LAMBDA }
+  | ";;"                 { SEMISEMI }
+  | ';'                  { SEMI }
+  | '"'                  {  (read_string (Buffer.create 17) lexbuf)  }
+  | '='                  { EQUAL }
+  | '<'                  { LESS }
+  | "->"                 { TARROW }
+  | "=>"                 { HARROW }
+  | ':'                  { COLON }
+  | '('                  { LPAREN }
+  | ')'                  { RPAREN }
+  | '+'                  { PLUS }
+  | '-'                  { MINUS }
+  | '*'                  { TIMES }
+  | ','                  { COMMA }
+  | var                  { VAR (Lexing.lexeme lexbuf) }
+  | constr               { CONSTR (Lexing.lexeme lexbuf) }
+  | eof                  { EOF }
 
 and read_string buf =
   parse
